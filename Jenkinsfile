@@ -3,7 +3,6 @@ pipeline
 	agent any
 	environment
 	{
-		scannerHome = tool name: 'sonar_scanner_dotnet', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'
 		jobName = "America's NAGP DevOps Assignment"
 		dockerRegistry = "dtr.nagarro.com:443"       		
         userName = "rajeevray"
