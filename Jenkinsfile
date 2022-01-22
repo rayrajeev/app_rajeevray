@@ -23,8 +23,11 @@ pipeline
 	stages
 	{
         stage ('Checkout')	{
-            git branch: 'master', url: 'https://github.com/rayrajeev/app_rajeevray.git'
-        }	
+            steps
+			{
+                git branch: 'master', url: 'https://github.com/rayrajeev/app_rajeevray.git'
+            }
+        }
 
 		stage ('nuget restore')
 		{
