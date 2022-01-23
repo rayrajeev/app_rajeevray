@@ -3,8 +3,7 @@ pipeline
 	agent any
 	environment
 	{
-		jobName = "America's NAGP DevOps Assignment"
-		dockerRegistry = "dtr.nagarro.com:443"       		
+		jobName = "america_nagp_assignment"		     		
         userName = "rajeevray"
 	}
 	options
@@ -35,6 +34,19 @@ pipeline
 				bat "dotnet restore"
 			}
 		}
+
+		stage ('Start sonarqube analysis')
+		{	
+			steps
+			{				
+				withSonarQubeEnv('Test_Sonar')
+				{
+					bat """
+					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" begin /k:$jobName /n:$jobName /v:1.0
+					"""    
+				}                
+			}
+		}
 		
 		stage ('clean and build')
 		{
@@ -44,6 +56,19 @@ pipeline
 								
 				bat "dotnet build -c Release"
 			}	
+		}
+
+		stage ('SonarQube Analysis end')
+		{				
+			steps
+			{				
+				withSonarQubeEnv('Test_Sonar')
+				{
+					bat """
+					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" end
+					"""
+				}
+			}
 		}			
 	}	 
 }
