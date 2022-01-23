@@ -4,7 +4,7 @@ pipeline
 	environment
 	{
 		scannerHome = tool name: 'sonar_scanner_dotnet', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'
-		jobName = "america_nagp_assignment"		     		
+		sonar_jobName = "sonar-rajeevray"		     		
         userName = "rajeevray"
 	}
 	options
@@ -43,7 +43,7 @@ pipeline
 				withSonarQubeEnv('Test_Sonar')
 				{
 					bat """
-					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" begin /k:$jobName /n:$jobName /v:1.0
+					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" begin /k:$sonar_jobName /n:$sonar_jobName /v:1.0
 					"""    
 				}                
 			}
