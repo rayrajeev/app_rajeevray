@@ -3,8 +3,8 @@ pipeline
 	agent any
 	environment
 	{
-		scannerHome = tool name: 'sonar_scanner_dotnet', type: 'hudson.plugins.sonar.MsBuildSQRunnerInstallation'
-		sonar_jobName = "sonar-rajeevray"		     		
+		scannerHome = tool name: 'sonar_scanner_dotnet'
+		sonar_jobName = "sonar-rajeevray",		     		
         userName = "rajeevray"
 	}
 	options
