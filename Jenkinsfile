@@ -3,8 +3,8 @@ pipeline
 	agent any
 	environment
 	{
-		scannerHome = tool name: 'sonar_scanner_dotnet'
-		sonar_jobName = "sonar-rajeevray",		     		
+		scannerHome = tool name: "sonar_scanner_dotnet"
+		sonarjobName = "sonar-rajeevray",		     		
         userName = "rajeevray"
 	}
 	options
@@ -43,7 +43,7 @@ pipeline
 				withSonarQubeEnv('Test_Sonar')
 				{
 					bat """
-					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" begin /k:$sonar_jobName /n:$sonar_jobName /v:1.0
+					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" begin /k:$sonarjobName /n:$sonarjobName /v:1.0
 					"""    
 				}                
 			}
