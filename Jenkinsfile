@@ -3,8 +3,8 @@ pipeline
 	agent any
 	environment
 	{
-		scannerHome = tool name: "sonar_scanner_dotnet"
-		sonarjobName = "sonar-rajeevray",		     		
+		scannerHome = tool name: 'sonar_scanner_dotnet'
+		sonarjobName = "sonar-rajeevray"		     		
         userName = "rajeevray"
 	}
 	options
