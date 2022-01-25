@@ -57,6 +57,14 @@ pipeline
 			}	
 		}
 
+		stage ('Test case execution')
+		{
+			steps
+			{				
+               bat "dotnet test test-project\\test-project.csproj -l:trx;LogFileName=nagp-us-devops-test-output.xml"
+			}	
+		}
+
 		stage ('SonarQube Analysis end')
 		{				
 			steps
