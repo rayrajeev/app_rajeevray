@@ -6,6 +6,12 @@ pipeline
 		scannerHome = tool name: 'sonar_scanner_dotnet'
 		sonarjobName = "sonar-rajeevray"		     		
         userName = "rajeevray"
+
+		//GKE Section
+		PROJECT_ID = "groovy-environs-338318"
+		CLUSTER_NAME="nagp-devops-cluster"
+		LOCATION="us-east1-b"
+		CREDENTIAL_ID:"NAGP DevOps"
 	}
 	options
 	{			
@@ -82,7 +88,16 @@ pipeline
 		{				
 			steps
 			{				
-				bat "kubectl apply -f deployment.yaml"
+				//bat "kubectl apply -f deployment.yaml"
+
+				step([
+                $class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.LOCATION,
+                manifestPattern: 'deployment.yaml',
+                credentialsId: env.CREDENTIAL_ID,
+                verifyDeployments: true])
 			}
 		}			
 	}	 
