@@ -9,9 +9,9 @@ pipeline
 
 		//GKE Section
 		PROJECT_ID = "groovy-environs-338318"
-		CLUSTER_NAME="nagp-devops-cluster"
-		LOCATION="us-east1-b"
-		CREDENTIAL_ID:"GKE-Kubernetes"
+		CLUSTER_NAME= "nagp-devops-cluster"
+		LOCATION= "us-east1-b"
+		CREDENTIAL_ID= "GKE-Kubernetes"
 	}
 	options
 	{			
