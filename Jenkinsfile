@@ -76,6 +76,14 @@ pipeline
 					"""
 				}
 			}
+		}
+
+		stage ('Kubernetes Deployment')
+		{				
+			steps
+			{				
+				sh "kubectl apply -f ./deployment.yaml"
+			}
 		}			
 	}	 
 }
