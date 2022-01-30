@@ -42,17 +42,6 @@ pipeline
 			}
 		}
 
-		stage ('Start sonarqube analysis')
-		{	
-			steps
-			{				
-				withSonarQubeEnv('Test_Sonar')
-				{
-					bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:sonar-rajeevray"  
-				}                
-			}
-		}
-		
 		stage ('Clean and build')
 		{
 			steps
@@ -63,26 +52,13 @@ pipeline
 			}	
 		}
 
-		stage ('Test case execution')
-		{
+		stage ('Release Artifacts')
+		{		
 			steps
 			{				
-               bat "dotnet test test-project\\test-project.csproj -l:trx;LogFileName=nagp-us-devops-test-output.xml"
-			}	
-		}
-
-		stage ('SonarQube Analysis end')
-		{				
-			steps
-			{				
-				withSonarQubeEnv('Test_Sonar')
-				{
-					bat """
-					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" end
-					"""
-				}
+				bat "dotnet publish nagp-devops-us -o nagp-devops-us/app/publish"
 			}
-		}
+		}		
 
 		stage ('Kubernetes Deployment')
 		{				
