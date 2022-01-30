@@ -42,47 +42,47 @@ pipeline
 			}
 		}
 
-		stage ('Start sonarqube analysis')
-		{	
-			steps
-			{				
-				withSonarQubeEnv('Test_Sonar')
-				{
-					bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:sonar-rajeevray"  
-				}                
-			}
-		}
+		// stage ('Start sonarqube analysis')
+		// {	
+		// 	steps
+		// 	{				
+		// 		withSonarQubeEnv('Test_Sonar')
+		// 		{
+		// 			bat "dotnet ${scannerHome}\\SonarScanner.MSBuild.dll begin /k:sonar-rajeevray"  
+		// 		}                
+		// 	}
+		// }
 		
-		stage ('clean and build')
-		{
-			steps
-			{				
-                bat "dotnet clean"
+		// stage ('clean and build')
+		// {
+		// 	steps
+		// 	{				
+        //         bat "dotnet clean"
 								
-				bat "dotnet build -c Release"
-			}	
-		}
+		// 		bat "dotnet build -c Release"
+		// 	}	
+		// }
 
-		stage ('Test case execution')
-		{
-			steps
-			{				
-               bat "dotnet test test-project\\test-project.csproj -l:trx;LogFileName=nagp-us-devops-test-output.xml"
-			}	
-		}
+		// stage ('Test case execution')
+		// {
+		// 	steps
+		// 	{				
+        //        bat "dotnet test test-project\\test-project.csproj -l:trx;LogFileName=nagp-us-devops-test-output.xml"
+		// 	}	
+		// }
 
-		stage ('SonarQube Analysis end')
-		{				
-			steps
-			{				
-				withSonarQubeEnv('Test_Sonar')
-				{
-					bat """
-					dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" end
-					"""
-				}
-			}
-		}
+		// stage ('SonarQube Analysis end')
+		// {				
+		// 	steps
+		// 	{				
+		// 		withSonarQubeEnv('Test_Sonar')
+		// 		{
+		// 			bat """
+		// 			dotnet "${scannerHome}\\SonarScanner.MSBuild.dll" end
+		// 			"""
+		// 		}
+		// 	}
+		// }
 
 		stage ('Kubernetes Deployment')
 		{				
@@ -96,8 +96,7 @@ pipeline
                 clusterName: env.CLUSTER_NAME,
                 location: env.LOCATION,
                 manifestPattern: 'deployment.yaml',
-                credentialsId: env.CREDENTIAL_ID,
-                verifyDeployments: true])
+                credentialsId: env.CREDENTIAL_ID])
 			}
 		}			
 	}	 
